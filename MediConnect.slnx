@@ -1,0 +1,8 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/MediConnect.API/MediConnect.API.csproj" />
+    <Project Path="src/MediConnect.Application/MediConnect.Application.csproj" />
+    <Project Path="src/MediConnect.Domain/MediConnect.Domain.csproj" />
+    <Project Path="src/MediConnect.Infrastructure/MediConnect.Infrastructure.csproj" />
+  </Folder>
+</Solution>

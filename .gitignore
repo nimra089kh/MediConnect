@@ -1,0 +1,19 @@
+# Build results
+bin/
+obj/
+
+# Visual Studio
+.vs/
+*.user
+
+# Environment — NEVER commit these
+appsettings.Development.json
+*.env
+.env
+
+# Rider
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
