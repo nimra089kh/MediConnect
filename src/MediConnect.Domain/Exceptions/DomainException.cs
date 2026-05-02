@@ -2,9 +2,27 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace MediConnect.Domain.Exceptions
+namespace MediConnect.Domain.Exceptions;
+
+public class DomainException : Exception
 {
-	internal class DomainException
-	{
-	}
+	public DomainException(string message) : base(message) { }
+}
+
+public class NotFoundException : DomainException
+{
+	public NotFoundException(string entity, Guid id)
+		: base($"{entity} with id '{id}' was not found.") { }
+}
+
+public class UnauthorizedException : DomainException
+{
+	public UnauthorizedException(string message = "Unauthorized access.")
+		: base(message) { }
+}
+
+public class SlotUnavailableException : DomainException
+{
+	public SlotUnavailableException()
+		: base("This appointment slot is no longer available.") { }
 }

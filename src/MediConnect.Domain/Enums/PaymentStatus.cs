@@ -4,7 +4,11 @@ using System.Text;
 
 namespace MediConnect.Domain.Enums
 {
-	internal class PaymentStatus
+	public enum PaymentStatus
 	{
+		Pending = 1,
+		Completed = 2,
+		Failed = 3,
+		Refunded = 4,
 	}
 }

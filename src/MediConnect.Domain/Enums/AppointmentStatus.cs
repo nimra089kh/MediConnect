@@ -4,7 +4,14 @@ using System.Text;
 
 namespace MediConnect.Domain.Enums
 {
-	internal class AppointmentStatus
+	public enum AppointmentStatus
 	{
+		Pending = 1,
+		Confirmed = 2,
+		Rejected = 3,
+		Completed = 4,
+		Canceled = 5,
+		Rescheduled = 6,
+		Noshow = 7,
 	}
 }

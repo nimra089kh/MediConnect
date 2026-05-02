@@ -4,7 +4,10 @@ using System.Text;
 
 namespace MediConnect.Domain.Enums
 {
-	internal class Gender
+	public enum Gender
 	{
+		Male = 1,
+		Female = 2,
+		Other = 3
 	}
 }
