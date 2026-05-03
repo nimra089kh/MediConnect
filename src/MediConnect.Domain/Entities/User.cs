@@ -7,7 +7,7 @@ namespace MediConnect.Domain.Entities
 {
 	public class User : BaseEntity
 	{
-		public Guid HospitaId { get; set; }
+		public Guid HospitalId{ get; set; }
 		public string Email { get; set; } = string.Empty;
 		public string PasswordHash { get; set; } = string.Empty;
 		public bool IsActive { get; set; } = true;
