@@ -11,10 +11,10 @@ namespace MediConnect.Application.Interfaces.Repositories
 			Guid id,
 			CancellationToken cancellationToken = default
 			);
-		Task<T> GetAllAsync(
+		Task<IEnumerable<T>> GetAllAsync(
 			CancellationToken cancellationToken = default
 			);
-		Task<T> AddAsync(
+		Task AddAsync(
 			T entity,
 			CancellationToken cancellationToken = default
 			);

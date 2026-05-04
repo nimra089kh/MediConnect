@@ -8,7 +8,7 @@ namespace MediConnect.Domain.Entities
 {
 	public class Appointment : BaseEntity
 	{
-		public Guid HosptalId { get; set; }
+		public Guid HospitalId { get; set; }
 		public Guid PatientId { get; set; }
 		public Guid DoctorId { get; set; }
 		public Guid SlotId { get; set; }
