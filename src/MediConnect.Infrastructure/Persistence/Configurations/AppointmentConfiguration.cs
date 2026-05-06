@@ -18,7 +18,7 @@ namespace MediConnect.Infrastructure.Persistence.Configurations
 
 			builder.Property(a => a.Notes)
 				.HasMaxLength(100);
-			builder.HasIndex(a => a.HosptalId);
+			builder.HasIndex(a => a.HospitalId);
 			builder.HasIndex(a => a.PatientId);
 			builder.HasIndex(a => a.DoctorId);
 			builder.HasIndex(a => a.AppointmentDate);

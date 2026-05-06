@@ -30,11 +30,11 @@ namespace MediConnect.Infrastructure.Persistence.Repositories
 		{
 			await _dbSet.AddAsync(entity , cancellationToken);
 		}
-		public void Update(T entity)
+		public void update(T entity)
 		{
 			_dbSet.Update(entity);
 		}
-		public void Delete(T entity)
+		public void delete(T entity)
 		{
 			if (entity is BaseEntity baseEntity)
 			{

@@ -65,7 +65,7 @@ namespace MediConnect.Infrastructure.Services
 				var jsonToken = Handler.ReadToken(token) as JwtSecurityToken;
 				var userIdClaim = jsonToken?.Claims.First(c => c.Type == ClaimTypes.NameIdentifier).Value;
 
-				return Guid.Parse(userIdClaim, out var userId)
+				return Guid.TryParse(userIdClaim, out var userId)
 					? userId
 					: null
 				;
