@@ -24,20 +24,30 @@ namespace MediConnect.Infrastructure.Persistence.Configurations
 			builder.HasIndex(a => a.AppointmentDate);
 			builder.HasIndex(a => a.Status);
 
-			builder.HasOne(a => a.Doctor)
-				.WithMany(d => d.Appointments)
-				.HasForeignKey(a => a.DoctorId)
-				.OnDelete(DeleteBehavior.Restrict);
+			builder.HasOne(a => a.Hospital)
+			.WithMany()
+			.HasForeignKey(a => a.HospitalId)
+			.OnDelete(DeleteBehavior.NoAction);
 
 			builder.HasOne(a => a.Patient)
 				.WithMany(p => p.Appointments)
 				.HasForeignKey(a => a.PatientId)
-				.OnDelete(DeleteBehavior.Restrict);
+				.OnDelete(DeleteBehavior.NoAction);
 
-			builder.HasOne( a => a.RescheduledFrom)
+			builder.HasOne(a => a.Doctor)
+				.WithMany(d => d.Appointments)
+				.HasForeignKey(a => a.DoctorId)
+				.OnDelete(DeleteBehavior.NoAction);
+
+			builder.HasOne(a => a.Slot)
+				.WithMany()
+				.HasForeignKey(a => a.SlotId)
+				.OnDelete(DeleteBehavior.NoAction);
+
+			builder.HasOne(a => a.RescheduledFrom)
 				.WithMany()
 				.HasForeignKey(a => a.RescheduledFromId)
-				.OnDelete(DeleteBehavior.Restrict); 
+				.OnDelete(DeleteBehavior.NoAction);
 
 		}
 	}

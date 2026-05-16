@@ -13,13 +13,13 @@ namespace MediConnect.Application.Features.Auth.Commands
 	public class RegisterPatientCommandHandler : IRequestHandler<RegisterPatientCommand, Result<AuthResponseDto>>
 	{
 		private readonly IUnitOfWork _unitOfWork;
-		private readonly IJwtService jwtService;
+		private readonly IJwtService _jwtService;
 
 		public RegisterPatientCommandHandler(IUnitOfWork unitOfWork,
 		IJwtService jwtService)
 		{
 			_unitOfWork = unitOfWork;
-			jwtService = jwtService;
+			_jwtService = jwtService;
 		}
 		public async Task<Result<AuthResponseDto>> Handle(RegisterPatientCommand request, CancellationToken cancellationToken)
 		{
@@ -58,8 +58,8 @@ namespace MediConnect.Application.Features.Auth.Commands
 			};
 			await _unitOfWork.Patients.AddAsync(patient, cancellationToken);
 
-			var accessToken = jwtService.GenerateAccessToken(user, "Patient");
-			var refreshToken = jwtService.GenerateRefreshToken();
+			var accessToken = _jwtService.GenerateAccessToken(user, "Patient");
+			var refreshToken = _jwtService.GenerateRefreshToken();
 
 			var refreshTokenEntity = new RefreshToken
 			{

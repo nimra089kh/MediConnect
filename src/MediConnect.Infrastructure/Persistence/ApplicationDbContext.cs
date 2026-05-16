@@ -36,6 +36,16 @@ namespace MediConnect.Infrastructure.Persistence
 			modelBuilder.ApplyConfigurationsFromAssembly(
 				typeof(ApplicationDbContext).Assembly);
 
+			// Soft delete filters
+			modelBuilder.Entity<Hospital>()
+				.HasQueryFilter(h => h.IsActive);
+			modelBuilder.Entity<Doctor>()
+				.HasQueryFilter(d => d.IsActive);
+			modelBuilder.Entity<Patient>()
+				.HasQueryFilter(p => p.IsActive);
+			modelBuilder.Entity<User>()
+				.HasQueryFilter(u => u.IsActive);
+
 			base.OnModelCreating(modelBuilder);
 		}
 
@@ -53,6 +63,7 @@ namespace MediConnect.Infrastructure.Persistence
 			return await base.SaveChangesAsync(cancellationToken);
 
 		}
+	
 
 
 

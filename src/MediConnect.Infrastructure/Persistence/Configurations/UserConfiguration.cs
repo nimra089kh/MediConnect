@@ -18,15 +18,18 @@ namespace MediConnect.Infrastructure.Persistence.Configurations
 				.IsUnique();
 			builder.Property(u => u.PasswordHash)
 				.IsRequired();
-			builder.HasOne(u => u.Doctor)
-				.WithOne(d => d.User)
-				.HasForeignKey<Doctor>(d => d.UserId);
-			builder.HasOne(u => u.Patient)
-				.WithOne(p => p.User)
-				.HasForeignKey<Patient>(p => p.UserId);
+
+
+			builder.HasOne(u => u.Hospital)
+					   .WithMany(h => h.Users)
+					   .HasForeignKey(u => u.HospitalId)
+					   .OnDelete(DeleteBehavior.NoAction);
+
 			builder.HasMany(u => u.RefreshTokens)
-				.WithOne(rt => rt.User)
-				.HasForeignKey(rt => rt.UserId);
+				.WithOne(r => r.User)
+				.HasForeignKey(r => r.UserId)
+				.OnDelete(DeleteBehavior.Cascade);
+
 
 
 		}

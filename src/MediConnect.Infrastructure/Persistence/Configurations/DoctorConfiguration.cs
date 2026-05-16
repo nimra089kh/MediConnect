@@ -33,6 +33,16 @@ namespace MediConnect.Infrastructure.Persistence.Configurations
 
 			builder.HasIndex(d => d.HospitalId);
 
+			builder.HasOne(d => d.User)
+		.WithOne(u => u.Doctor)
+		.HasForeignKey<Doctor>(d => d.UserId)
+		.OnDelete(DeleteBehavior.NoAction);
+
+			builder.HasOne(d => d.Hospital)
+				.WithMany(h => h.Doctors)
+				.HasForeignKey(d => d.HospitalId)
+				.OnDelete(DeleteBehavior.NoAction);
+
 			builder.HasMany(d => d.Departments)
 				.WithMany(dep => dep.Doctors)
 				.UsingEntity(j => j.ToTable("DoctorDepartments"));

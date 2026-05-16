@@ -16,5 +16,6 @@ namespace MediConnect.Domain.Entities
 	   public ICollection<Department> Departments { get; set; } = new List<Department>();
 	   public ICollection<Doctor> Doctors { get; set; } = new List<Doctor>();
 	   public ICollection<Patient> Patients { get; set; } = new List<Patient>();
+		public ICollection<User> Users { get; set; } = new List<User>();
 	}
 }
