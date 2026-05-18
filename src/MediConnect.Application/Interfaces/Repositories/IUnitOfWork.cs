@@ -13,6 +13,9 @@ namespace MediConnect.Application.Interfaces.Repositories
 		IUserRepository Users { get; }
 		IGenericRepository<RefreshToken> RefreshTokens { get; }
 		IGenericRepository<Hospital> Hospitals { get; }
+		IDoctorAvailabilityRepository Availabilities { get; }
+		ISlotRepository Slots { get; }
+		IGenericRepository<AppointmentStatusHistory> StatusHistories { get; }
 		Task<int> SaveChangesAsync(
 			CancellationToken cancellationToken = default
 			);

@@ -1,4 +1,6 @@
 ﻿using MediatR;
+using MediConnect.Application.Features.Appointments.Commands;
+using MediConnect.Application.Features.Appointments.DTOs;
 using MediConnect.Application.Features.Appointments.Queries;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -44,5 +46,27 @@ namespace MediConnect.API.Controllers
 
 			return Ok(result.Data);
 		}
+
+		[HttpPost("book")]
+		[Authorize(Roles = "Patient")]
+		public async Task<IActionResult> BookAppointment(
+	   [FromBody] BookAppointmentDto request)
+		{
+			var command = new BookAppointmentCommand(
+				PatientId: GetUserId(),
+				HospitalId: GetHospitalId(),
+				DoctorId: request.DoctorId,
+				SlotId: request.SlotId,
+				AppointmentDate: request.AppointmentDate,
+				Notes: request.Notes);
+
+			var result = await _mediator.Send(command);
+
+			if (!result.IsSuccess)
+				return BadRequest(new { error = result.Error });
+
+			return Ok(result.Data);
+		}
+
 	}
 }

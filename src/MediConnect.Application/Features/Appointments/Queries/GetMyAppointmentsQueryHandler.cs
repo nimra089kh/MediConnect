@@ -19,9 +19,18 @@ namespace MediConnect.Application.Features.Appointments.Queries {
 
 		public async Task<Result<IEnumerable<AppointmentResponseDto>>> Handle(GetMyAppointmentsQuery request, CancellationToken cancellationToken)
 		{
-			
-				var appointments = await _UnitOfWork.Appointments.GetByPatientIdAsync(request.PatientId, cancellationToken);
-				var filtered = appointments.Where(a => a.HospitalId == request.HospitalId);
+			var patient = await _UnitOfWork.Patients
+				.GetByUserIdAsync(request.PatientId, cancellationToken);
+
+			if (patient is null)
+				return Result<IEnumerable<AppointmentResponseDto>>
+					.Success(Enumerable.Empty<AppointmentResponseDto>());
+
+
+
+			var appointments = await _UnitOfWork.Appointments
+	.GetByPatientIdAsync(patient.Id, cancellationToken);
+			var filtered = appointments.Where(a => a.HospitalId == request.HospitalId);
 				var response = filtered.Select(a => new AppointmentResponseDto
 				{
 					Id = a.Id,

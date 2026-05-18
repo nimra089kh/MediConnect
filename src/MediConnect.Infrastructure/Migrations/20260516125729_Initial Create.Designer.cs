@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MediConnect.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20260508144338_InitialCreate")]
+    [Migration("20260516125729_Initial Create")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -376,7 +376,7 @@ namespace MediConnect.Infrastructure.Migrations
                     b.Property<bool>("IsAvailable")
                         .HasColumnType("bit");
 
-                    b.Property<int>("SlotDurationInMinutes")
+                    b.Property<int>("SlotDurationMinutes")
                         .HasColumnType("int");
 
                     b.Property<TimeOnly>("StartTime")

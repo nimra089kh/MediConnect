@@ -32,7 +32,7 @@ namespace MediConnect.Infrastructure.Persistence.Repositories
 		{
 			return await _dbSet
 				.Include(a => a.Doctor)
-				.Include(a => a.Hospital)
+				.Include(a => a.Patient)
 				.Where(a => a.PatientId == patientId)
 				.OrderByDescending(a => a.AppointmentDate)
 				.ToListAsync(cancellationToken);

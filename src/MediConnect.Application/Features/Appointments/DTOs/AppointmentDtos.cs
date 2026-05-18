@@ -16,4 +16,11 @@ namespace MediConnect.Application.Features.Appointments.DTOs
 		public string? Notes { get; set; }
 		public string Status { get; set; } = string.Empty;
 	}
+	public class BookAppointmentDto
+	{
+		public Guid DoctorId { get; set; }
+		public Guid SlotId { get; set; }
+		public DateOnly AppointmentDate { get; set; }
+		public string? Notes { get; set; }
+	}
 }

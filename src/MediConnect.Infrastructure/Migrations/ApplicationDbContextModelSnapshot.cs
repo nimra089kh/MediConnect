@@ -373,7 +373,7 @@ namespace MediConnect.Infrastructure.Migrations
                     b.Property<bool>("IsAvailable")
                         .HasColumnType("bit");
 
-                    b.Property<int>("SlotDurationInMinutes")
+                    b.Property<int>("SlotDurationMinutes")
                         .HasColumnType("int");
 
                     b.Property<TimeOnly>("StartTime")
