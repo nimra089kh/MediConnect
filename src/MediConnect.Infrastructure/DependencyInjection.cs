@@ -1,5 +1,6 @@
 ﻿using MediConnect.Application.Interfaces.Repositories;
 using MediConnect.Application.Interfaces.Services;
+using MediConnect.Infrastructure.Services;
 using MediConnect.Infrastructure.Persistence;
 using MediConnect.Infrastructure.Services;
 using Microsoft.EntityFrameworkCore;
@@ -24,6 +25,9 @@ namespace MediConnect.Infrastructure
 			services.AddScoped<IUnitOfWork , UnitOfWork> ();
 			
 			services.AddScoped<IJwtService, JwtService>();
+
+			services.AddHttpClient();
+			services.AddScoped<IAiService, OpenAiService>();
 
 			return services;
 		}

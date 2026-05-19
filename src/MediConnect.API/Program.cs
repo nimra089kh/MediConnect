@@ -1,4 +1,5 @@
-﻿using MediConnect.Application;
+﻿using MediConnect.API.Middleware;
+using MediConnect.Application;
 using MediConnect.Infrastructure;
 using MediConnect.Infrastructure.Persistence;
 using MediConnect.Infrastructure.Persistence.Seeds;
@@ -63,6 +64,8 @@ builder.Services.AddInfrastructure(builder.Configuration);
 var jwtKey = builder.Configuration["Jwt:SecretKey"]
 	?? throw new InvalidOperationException("JWT SecretKey missing.");
 
+
+
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 	.AddJwtBearer(options =>
 	{
@@ -90,6 +93,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseMiddleware<ExceptionHandlingMiddleware>();
 app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();

@@ -26,8 +26,8 @@ namespace MediConnect.API.Controllers
 
 		private Guid GetHospitalId() =>
 			 Guid.Parse(User.FindFirst("HospitalId")!.Value);
-		
 
+		
 		private string GetRole() =>
 			User.FindFirst(ClaimTypes.Role)!.Value;
 
@@ -66,6 +66,50 @@ namespace MediConnect.API.Controllers
 				return BadRequest(new { error = result.Error });
 
 			return Ok(result.Data);
+		}
+
+		// Cancel appointment
+		[HttpPut("{appointmentId}/cancel")]
+		[Authorize(Roles = "Patient,Doctor,Admin")]
+		public async Task<IActionResult> CancelAppointment(
+			Guid appointmentId,
+			[FromBody] CancelAppointmentDto request)
+		{
+			var command = new CancelAppointmentCommand(
+				AppointmentId: appointmentId,
+				UserId: GetUserId(),
+				HospitalId: GetHospitalId(),
+				Role: GetRole(),
+				Reason: request.Reason);
+
+			var result = await _mediator.Send(command);
+
+			if (!result.IsSuccess)
+				return BadRequest(new { error = result.Error });
+
+			return Ok(new { message = "Appointment cancelled successfully." });
+		}
+
+		// Doctor confirm/reject
+		[HttpPut("{appointmentId}/status")]
+		[Authorize(Roles = "Doctor")]
+		public async Task<IActionResult> UpdateAppointmentStatus(
+			Guid appointmentId,
+			[FromBody] UpdateAppointmentStatusDto request)
+		{
+			var command = new UpdateAppointmentStatusCommand(
+				AppointmentId: appointmentId,
+				DoctorUserId: GetUserId(),
+				HospitalId: GetHospitalId(),
+				Action: request.Action,
+				Reason: request.Reason);
+
+			var result = await _mediator.Send(command);
+
+			if (!result.IsSuccess)
+				return BadRequest(new { error = result.Error });
+
+			return Ok(new { message = $"Appointment {request.Action.ToString().ToLower()}ed successfully." });
 		}
 
 	}

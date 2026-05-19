@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MediConnect.Application.Features.Appointments.Commands;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -22,5 +23,15 @@ namespace MediConnect.Application.Features.Appointments.DTOs
 		public Guid SlotId { get; set; }
 		public DateOnly AppointmentDate { get; set; }
 		public string? Notes { get; set; }
+	}
+	public class CancelAppointmentDto
+	{
+		public string Reason { get; set; } = string.Empty;
+	}
+
+	public class UpdateAppointmentStatusDto
+	{
+		public AppointmentAction Action { get; set; }
+		public string? Reason { get; set; }
 	}
 }
