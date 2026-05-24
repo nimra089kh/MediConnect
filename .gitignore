@@ -1,21 +1,23 @@
-# Build results
+# Build
 bin/
 obj/
 
 # Visual Studio
 .vs/
 *.user
+*.suo
 
-# Environment — NEVER commit these
-appsettings.Development.json
-*.env
-.env
-**/appsettings.Development.json
-**/appsettings.*.json
-!**/appsettings.json
-
-# Rider
+# Rider / VSCode
 .idea/
+.vscode/
+
+# Environment
+.env
+.env.*
+
+# Secret configs
+appsettings.Development.json
+appsettings.Local.json
 
 # OS
 .DS_Store
